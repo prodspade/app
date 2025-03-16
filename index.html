@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#282828">
+  <meta name="description" content="A Progressive Web App Music Player">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <title>Music Player</title>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => console.log('ServiceWorker registered'))
+          .catch(err => console.log('ServiceWorker registration failed: ', err));
+      });
+    }
+  </script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="music-player">
+    <div class="album-list">
+      <h2>Albums</h2>
+      <div class="albums"></div>
+    </div>
+    <div class="player-controls">
+      <div class="now-playing">
+        <img id="album-art" src="slxmercover.jpg" alt="Album Art">
+        <div class="track-info">
+          <h3 id="track-name">Select a track</h3>
+          <p id="artist-name">Artist</p>
+        </div>
+      </div>
+      <div id="tracks-container" class="album-tracks"></div>
+      <div class="mini-player">
+        <div class="mini-player-header">
+          <div class="mini-player-info">
+            <img id="mini-art" src="" alt="Album Art">
+            <div>
+              <h4 id="mini-track-name">No song playing</h4>
+              <p id="mini-artist-name">Artist</p>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+        <button id="prev"><i class="fas fa-backward"></i></button>
+        <button id="play"><i class="fas fa-play"></i></button>
+        <button id="next"><i class="fas fa-forward"></i></button>
+        <button id="loop"><i class="fas fa-redo"></i></button>
+        <button id="shuffle"><i class="fas fa-random"></i></button>
+      </div>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <div class="time-display">
+        <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
